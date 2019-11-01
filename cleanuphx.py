@@ -303,8 +303,10 @@ def send_intersight_api(method,resource_path,query_params,moid=None,body=None,in
 
     try:
         results = intersight_handle.intersight_call(**options)
-        if results.status_code == 200:
+        if results.status_code == 200 and method == "get":
             return results.json()
+        elif results.status_code == 200:
+            return True
         else:
             raise Exception
     except Exception as e:
