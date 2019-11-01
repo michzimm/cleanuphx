@@ -524,10 +524,12 @@ print ("\n")
 while True:
 
     print (Style.BRIGHT+Fore.WHITE+"Choose the number that best describes your HyperFlex cluster:"+Style.RESET_ALL)
+    print ("\n")
     print ("     1. Standard HyperFlex connected to Intersight")
     print ("     2. Standard HyperFlex not connected to Intersight")
     print ("     3. HyperFlex Edge connected to Intersight")
     print ("     4. HyperFlex Edge not connected Intersight")
+    print("\n")
     cluster_type = input(Style.BRIGHT+Fore.WHITE+"     Selection: "+Style.RESET_ALL)
     if cluster_type in ("1","2","3","4"):
         break
@@ -555,9 +557,11 @@ if cluster_type in ("1","3"):
             test_intersight_handle(intersight_handle)
             print ("   <> Found API key file and able to connect to Intersight.")
             print ("      "+u'\U0001F44D'+" Done.")
+            print ("\n")
             break
         else:
             print ("   <> Unable to locate provided API key file. please retry...")
+            print ("\n")
 
     while True:
         intersight_cluster_profile_name = input(Style.BRIGHT+Fore.WHITE+"Please enter the name of the HyperFlex cluster in Intersight: "+Style.RESET_ALL)
