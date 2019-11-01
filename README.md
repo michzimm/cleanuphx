@@ -19,7 +19,7 @@ This script will DELETE all virtual machines and data on the HyperFlex cluster a
 
 Recommended to use a virtual environment, but not mandatory.
 
-1. Install python2.7
+1. Install python3.x
 2. Install pip
 3. Using the provided "requirements.txt" file, run `pip install -r requirements.txt`.
 
