@@ -834,7 +834,7 @@ if cluster_type in ("1","2"):
 
 
     print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Going to sleep while HyperFlex nodes are re-imaged, this can take ~25-30 minutes due to multiple required reboots during install..."+Style.RESET_ALL)
-    for i in xrange(500,0,-1):
+    for i in range(500,0,-1):
         sys.stdout.write(str('.'))
         sys.stdout.flush()
         time.sleep(3)
@@ -1009,7 +1009,7 @@ if cluster_type in ("3","4"):
 
 
     print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Going to sleep while HyperFlex nodes are re-imaged, this can take ~25-30 minutes due to multiple required reboots during install..."+Style.RESET_ALL)
-    for i in xrange(600,0,-1):
+    for i in range(600,0,-1):
         sys.stdout.write(str('.'))
         sys.stdout.flush()
         time.sleep(3)
