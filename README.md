@@ -1,4 +1,4 @@
-# HyperFlex Clean-up Python Script aka "cleanhx"
+# HyperFlex Clean-up Python Script aka "cleanuphx"
 
 ## Purpose
 
@@ -29,7 +29,7 @@ Recommended to use a virtual environment, but not mandatory.
 
 ## Run Script
 
-1. Run `cleanhx.py`.
+1. Run `cleanuphx.py`.
 2. Enter UCS Manager IP address.
 3. Enter UCS Manager username.
 4. Enter UCS Manager password. (Note: the password is not saved/stored)
