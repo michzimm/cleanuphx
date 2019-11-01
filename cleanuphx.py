@@ -975,101 +975,104 @@ if cluster_type in ("3","4"):
     print ("      "+u'\U0001F44D'+" Done.")
     print ("\n")
 
-
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Modifying Boot Policy on HyperFlex Edge nodes..."+Style.RESET_ALL)
-    for cimc_handle in cimc_handle_list:
-        set_cimc_boot_policy(cimc_handle)
-        cimc_ip = get_cimc_ip(cimc_handle)
-        print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", Boot Policy Modified: True")
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
-
-
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Powering-on HyperFlex Edge nodes..."+Style.RESET_ALL)
-    for cimc_handle in cimc_handle_list:
-        cimc_power_action(cimc_handle, "on")
-    for cimc_handle in cimc_handle_list:
-        while True:
-            cimc_power_state = get_cimc_power_state(cimc_handle)
+    try:
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Modifying Boot Policy on HyperFlex Edge nodes..."+Style.RESET_ALL)
+        for cimc_handle in cimc_handle_list:
+            set_cimc_boot_policy(cimc_handle)
             cimc_ip = get_cimc_ip(cimc_handle)
-            if cimc_power_state == "on":
-                print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", Power State: on")
-                break
-            else:
-                time.sleep(5)
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
+            print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", Boot Policy Modified: True")
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Disconnecting from CIMCs..."+Style.RESET_ALL)
-    for cimc_handle in cimc_handle_list:
-        cimc_disconnect(cimc_handle)
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Powering-on HyperFlex Edge nodes..."+Style.RESET_ALL)
+        for cimc_handle in cimc_handle_list:
+            cimc_power_action(cimc_handle, "on")
+        for cimc_handle in cimc_handle_list:
+            while True:
+                cimc_power_state = get_cimc_power_state(cimc_handle)
+                cimc_ip = get_cimc_ip(cimc_handle)
+                if cimc_power_state == "on":
+                    print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", Power State: on")
+                    break
+                else:
+                    time.sleep(5)
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Going to sleep while HyperFlex nodes are re-imaged, this can take ~25-30 minutes due to multiple required reboots during install..."+Style.RESET_ALL)
-    for i in range(600,0,-1):
-        sys.stdout.write(str('.'))
-        sys.stdout.flush()
-        time.sleep(3)
-    print ("\n")
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Disconnecting from CIMCs..."+Style.RESET_ALL)
+        for cimc_handle in cimc_handle_list:
+            cimc_disconnect(cimc_handle)
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Waking up..."+Style.RESET_ALL)
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Going to sleep while HyperFlex nodes are re-imaged, this can take ~25-30 minutes due to multiple required reboots during install..."+Style.RESET_ALL)
+        for i in range(600,0,-1):
+            sys.stdout.write(str('.'))
+            sys.stdout.flush()
+            time.sleep(3)
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Connecting to CIMC interfaces of HyperFlex Edge nodes..."+Style.RESET_ALL)
-    cimc_handle_list = []
-    for cimc_ip in cimc_ip_list:
-        print ("   <> Connected to CIMC IP: "+cimc_ip)
-        cimc_handle = cimc_connect(cimc_ip, cimc_user, cimc_pass)
-        cimc_handle_list.append(cimc_handle)
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Waking up..."+Style.RESET_ALL)
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Waiting for access to ESXi CLI prompt for service profiles, this can take another couple of minutes..."+Style.RESET_ALL)
-    threads = []
-    for cimc_ip in cimc_ip_list:
-        print ("   <> Waiting to connect to ESXi CLI prompt on CIMC IP: "+cimc_ip)
-        thread = Thread(target=monitor_cimc_esxi_prompt, args=(cimc_ip,))
-        threads.append(thread)
-        thread.start()
-    for thread in threads:
-        thread.join()
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Connecting to CIMC interfaces of HyperFlex Edge nodes..."+Style.RESET_ALL)
+        cimc_handle_list = []
+        for cimc_ip in cimc_ip_list:
+            print ("   <> Connected to CIMC IP: "+cimc_ip)
+            cimc_handle = cimc_connect(cimc_ip, cimc_user, cimc_pass)
+            cimc_handle_list.append(cimc_handle)
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Gracefully Shutting Down HyperFlex Edge nodes..."+Style.RESET_ALL)
-    for cimc_handle in cimc_handle_list:
-        cimc_power_action(cimc_handle, "shutdown")
-    for cimc_handle in cimc_handle_list:
-        while True:
-            cimc_power_state = get_cimc_power_state(cimc_handle)
-            cimc_ip = get_cimc_ip(cimc_handle)
-            if cimc_power_state == "off":
-                print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", Power State: off")
-                break
-            else:
-                time.sleep(5)
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Waiting for access to ESXi CLI prompt for service profiles, this can take another couple of minutes..."+Style.RESET_ALL)
+        threads = []
+        for cimc_ip in cimc_ip_list:
+            print ("   <> Waiting to connect to ESXi CLI prompt on CIMC IP: "+cimc_ip)
+            thread = Thread(target=monitor_cimc_esxi_prompt, args=(cimc_ip,))
+            threads.append(thread)
+            thread.start()
+        for thread in threads:
+            thread.join()
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Deleting vMedia Mount on HyperFlex Edge nodes..."+Style.RESET_ALL)
-    for cimc_handle in cimc_handle_list:
-        delete_cimc_vmedia_mount(cimc_handle)
-        print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", vMedia Mount Deleted: True")
-    print ("      "+u'\U0001F44D'+" Done.")
-    print ("\n")
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Gracefully Shutting Down HyperFlex Edge nodes..."+Style.RESET_ALL)
+        for cimc_handle in cimc_handle_list:
+            cimc_power_action(cimc_handle, "shutdown")
+        for cimc_handle in cimc_handle_list:
+            while True:
+                cimc_power_state = get_cimc_power_state(cimc_handle)
+                cimc_ip = get_cimc_ip(cimc_handle)
+                if cimc_power_state == "off":
+                    print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", Power State: off")
+                    break
+                else:
+                    time.sleep(5)
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
+
+    except Exception as e:
+        print (e)
+
+    finally:
+        print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Deleting vMedia Mount on HyperFlex Edge nodes..."+Style.RESET_ALL)
+        for cimc_handle in cimc_handle_list:
+            delete_cimc_vmedia_mount(cimc_handle)
+            print ("   <> Item: HyperFlex Edge Node CIMC: "+cimc_ip+", vMedia Mount Deleted: True")
+        print ("      "+u'\U0001F44D'+" Done.")
+        print ("\n")
 
 
-    print (Style.BRIGHT+Fore.GREEN+"TASK COMPLETED: Re-Image HyperFlex Edge Nodes"+Style.RESET_ALL)
-    print ("\n")
+        print (Style.BRIGHT+Fore.GREEN+"TASK COMPLETED: Re-Image HyperFlex Edge Nodes"+Style.RESET_ALL)
+        print ("\n")
 
 
 ##############################
@@ -1084,14 +1087,14 @@ if cluster_type in ("1","3"):
 
 
     print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Unassigning Nodes from HyperFlex Cluster Profile..."+Style.RESET_ALL)
-    cluster_profile = get_intersight_cluster_profile(api_instance, intersight_cluster_profile_name)
-    intersight_cluster_profile_unassign_nodes(api_instance, cluster_profile)
+    intersight_cluster_profile_moid = get_intersight_cluster_profile_moid(intersight_cluster_profile_name)
+    intersight_cluster_profile_unassign_nodes(intersight_cluster_profile_moid)
     print ("      "+u'\U0001F44D'+" Done.")
     print ("\n")
 
 
     print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Deleteing HyperFlex Cluster Device from Intersight Device List..."+Style.RESET_ALL)
-    delete_intersight_device(api_instance, intersight_cluster_profile_name)
+    delete_intersight_hyperflex_cluster(intersight_cluster_profile_moid)
     print ("      "+u'\U0001F44D'+" Done.")
     print ("\n")
 
