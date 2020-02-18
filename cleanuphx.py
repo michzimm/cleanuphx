@@ -864,7 +864,7 @@ if cluster_type in ("1","2"):
 
     print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Waiting for access to ESXi CLI prompt for service profiles, this can take another couple of minutes..."+Style.RESET_ALL)
     threads = []
-    for key, value in sp_kvm_ips.iteritems():
+    for key, value in sp_kvm_ips.items():
         print ("   <> Waiting to connect to ESXi CLI prompt on service profile: "+key)
         thread = Thread(target=monitor_esxi_prompt, args=(key, value,))
         threads.append(thread)
