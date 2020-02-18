@@ -3,7 +3,6 @@
 """
 HyperFlex Clean-Up (Reset) Script
 Author: Michael Zimmerman
-Contributors: Matthew Garrett
 Email: mzcisco01@gmail.com
 
 Copyright (c) 2018 Cisco and/or its affiliates.
@@ -857,7 +856,7 @@ if cluster_type in ("1","2"):
     print (Style.BRIGHT+Fore.CYAN+"-->"+Fore.WHITE+" Getting service profile kvm ip addresses..."+Style.RESET_ALL)
     sp_objects = get_sps_in_org(ucs_handle, org_name)
     sp_kvm_ips = get_sp_kvm_ips(ucs_handle, sp_objects)
-    for key, value in sp_kvm_ips.iteritems():
+    for key, value in sp_kvm_ips.items():
         print ("   <> Item: Service Profile, Name: "+key+", KVM IP: "+value)
     print ("      "+u'\U0001F44D'+" Done.")
     print ("\n")
