@@ -693,12 +693,12 @@ if cluster_type in ("3","4"):
             break
         else:
             print ("   <> Share type entered not valid, please retry...")
-    cimc_vmedia_share = input(Style.BRIGHT+Fore.WHITE+"Please enter the Remote Share location (i.e. \"10.1.8.3:/isos\"): "+Style.RESET_ALL)
+    cimc_vmedia_share = input(Style.BRIGHT+Fore.WHITE+"Please enter the Remote Share location (i.e. [nfs]:\"10.1.8.3:/isos\", [www]:\"http://10.1.8.3/\"): "+Style.RESET_ALL)
     cimc_vmedia_filename = input(Style.BRIGHT+Fore.WHITE+"Please enter the full filename of the HyperFlex ESXi ISO image on the Remote Share: "+Style.RESET_ALL)
     if cimc_vmedia_type == "cifs" or cimc_vmedia_type == "www":
         while True:
             user_prompt = input(Style.BRIGHT+Fore.WHITE+"Do you need to enter a Username and Password to access the Remote Share? (y/n): "+Style.RESET_ALL)
-            if user_prompt in ("y","Y","n","N"):
+            if user_prompt in ("y","Y","yes","Yes","YES"):
                 cimc_vmedia_user = input(Style.BRIGHT+Fore.WHITE+"Enter Remote Share username: "+Style.RESET_ALL)
                 cimc_vmedia_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Enter Remote Share password: "+Style.RESET_ALL)
                 break
