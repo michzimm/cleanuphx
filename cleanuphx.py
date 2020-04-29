@@ -595,7 +595,9 @@ if cluster_type in ("1","2"):
 
     while True:
         ucsm_ip = input(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager IP address: "+Style.RESET_ALL)
-        ucsm_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager username: "+Style.RESET_ALL)
+        ucsm_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager username: [admin] "+Style.RESET_ALL)
+        if ucsm_user = None:
+            ucsm_user = "admin"
         ucsm_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager password: "+Style.RESET_ALL)
         try:
             ucs_handle = ucs_connect(ucsm_ip, ucsm_user, ucsm_pass)
@@ -669,7 +671,9 @@ if cluster_type in ("3","4"):
 
 
     while True:
-        cimc_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the HyperFlex Edge node's CIMC username: "+Style.RESET_ALL)
+        cimc_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the HyperFlex Edge node's CIMC username: [admin] "+Style.RESET_ALL)
+        if cimc_user = None:
+            cimc_user = "admin"
         cimc_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Please enter the HyperFlex Edge node's CIMC password: "+Style.RESET_ALL)
         try:
             cimc_handle = cimc_connect(cimc_ip_list[0], cimc_user, cimc_pass)
@@ -694,6 +698,8 @@ if cluster_type in ("3","4"):
         else:
             print ("   <> Share type entered not valid, please retry...")
     cimc_vmedia_share = input(Style.BRIGHT+Fore.WHITE+"Please enter the Remote Share location (i.e. [nfs]:\"10.1.8.3:/isos\", [www]:\"http://10.1.8.3/\"): "+Style.RESET_ALL)
+    if cimc_vmedia_type in ("www","WWW") and not cimc_vmedia_share.endswith('/'):
+        cimc_vmedia_share = cimc_vmedia_share + '/'
     cimc_vmedia_filename = input(Style.BRIGHT+Fore.WHITE+"Please enter the full filename of the HyperFlex ESXi ISO image on the Remote Share: "+Style.RESET_ALL)
     if cimc_vmedia_type == "cifs" or cimc_vmedia_type == "www":
         while True:
@@ -701,6 +707,8 @@ if cluster_type in ("3","4"):
             if user_prompt in ("y","Y","yes","Yes","YES"):
                 cimc_vmedia_user = input(Style.BRIGHT+Fore.WHITE+"Enter Remote Share username: "+Style.RESET_ALL)
                 cimc_vmedia_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Enter Remote Share password: "+Style.RESET_ALL)
+                break
+            if user_prompt in ("n","N","no","No","NO"):
                 break
             else:
                 print ("   <> Not a valid response, please retry...")
@@ -718,7 +726,9 @@ print ("\n")
 
 while True:
     vcenter_ip = input(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter IP address: "+Style.RESET_ALL)
-    vcenter_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter username: "+Style.RESET_ALL)
+    vcenter_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter username: [administrator@vsphere.local] "+Style.RESET_ALL)
+    if vcenter_user = None:
+        vcenter_user = "administrator@vsphere.local"
     vcenter_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter password: "+Style.RESET_ALL)
     try:
         vcenter_handle = vcenter_connect(vcenter_ip, vcenter_user, vcenter_pass)
