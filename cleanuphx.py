@@ -595,8 +595,8 @@ if cluster_type in ("1","2"):
 
     while True:
         ucsm_ip = input(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager IP address: "+Style.RESET_ALL)
-        ucsm_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager username: [admin] "+Style.RESET_ALL)
-        if ucsm_user = None:
+        ucsm_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager username: "+Style.RESET_ALL+"[admin] ")
+        if not ucsm_user:
             ucsm_user = "admin"
         ucsm_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Please enter the UCS Manager password: "+Style.RESET_ALL)
         try:
@@ -671,8 +671,8 @@ if cluster_type in ("3","4"):
 
 
     while True:
-        cimc_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the HyperFlex Edge node's CIMC username: [admin] "+Style.RESET_ALL)
-        if cimc_user = None:
+        cimc_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the HyperFlex Edge node's CIMC username: "+Style.RESET_ALL+"[admin] ")
+        if not cimc_user:
             cimc_user = "admin"
         cimc_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Please enter the HyperFlex Edge node's CIMC password: "+Style.RESET_ALL)
         try:
@@ -726,8 +726,8 @@ print ("\n")
 
 while True:
     vcenter_ip = input(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter IP address: "+Style.RESET_ALL)
-    vcenter_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter username: [administrator@vsphere.local] "+Style.RESET_ALL)
-    if vcenter_user = None:
+    vcenter_user = input(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter username: "+Style.RESET_ALL+"[administrator@vsphere.local] ")
+    if not vcenter_user:
         vcenter_user = "administrator@vsphere.local"
     vcenter_pass = getpass.getpass(Style.BRIGHT+Fore.WHITE+"Please enter the vCenter password: "+Style.RESET_ALL)
     try:
