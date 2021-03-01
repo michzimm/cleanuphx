@@ -255,7 +255,7 @@ def vcenter_disconnect(vcenter_handle):
 
 
 def get_intersight_handle(intersight_api_file):
-    with open(intersight_api_file, 'r') as api_file:
+    with open("./keys/"+intersight_api_file, 'r') as api_file:
         intersight_api_params = json.load(api_file)
 
     private_key=intersight_api_params['api_private_key_file']
@@ -573,7 +573,7 @@ if cluster_type in ("1","3"):
 
     while True:
         intersight_api_file = input(Style.BRIGHT+Fore.WHITE+"Please enter the name of the API key file: "+Style.RESET_ALL)
-        if path.exists(intersight_api_file):
+        if path.exists("./keys/"+intersight_api_file):
             intersight_handle = get_intersight_handle(intersight_api_file)
             test_intersight_handle(intersight_handle)
             logger.info ("   <> Found API key file and able to connect to Intersight.")
