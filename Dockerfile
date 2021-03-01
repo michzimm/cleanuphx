@@ -5,6 +5,7 @@ RUN mkdir /cleanuphx/logs
 
 COPY ./cleanuphx.py /cleanuphx/
 COPY ./requirements.txt /cleanuphx/
+COPY ./keys /cleanuphx/
 
 RUN pip install -r /cleanuphx/requirements.txt
 
