@@ -27,6 +27,8 @@ Recommended to use a virtual environment, but not mandatory.
 
 1. Manually create a UCS vMedia policy in the "root" UCS Org. The vMedia policy should map to the HyperFlex ESXi ISO that should be installed on the HyperFlex nodes as part of the reset process. The vMedia policy is created in the "root" Org so that it can be reused over and over and is not deleted as part of the reset process.
 
+2. If using against Intersight, you must have an API key setup in Intersight and the API key and secret must be configured in the "keys" directory. See the "keys/example" and "keys/example_SecretKey" for the format.
+
 ## Run Script
 
 1. Run `cleanuphx.py`.
