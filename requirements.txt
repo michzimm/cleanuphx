@@ -16,4 +16,4 @@ requests==2.21.0
 selenium==3.141.0
 six==1.12.0
 ucsmsdk==0.9.6
-urllib3==1.24.2
+urllib3==1.26.5
