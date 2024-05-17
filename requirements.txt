@@ -15,5 +15,5 @@ pyvmomi==6.7.1
 requests==2.21.0
 selenium==3.141.0
 six==1.12.0
-ucsmsdk==0.9.6
+ucsmsdk==0.9.17
 urllib3==1.24.2
