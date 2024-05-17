@@ -123,6 +123,8 @@ def set_vmedia_boot_policy(ucs_handle, sp_template_boot_policy_object, org_name)
         mo = LsbootUsbFlashStorageImage(parent_mo_or_dn="org-root/org-"+org_name+"/boot-policy-"+sp_template_boot_policy_name+"/storage/local-storage", order="3")
     elif sp_template_boot_policy_name in ("HyperFlex-m5", "HyperFlex-m2pch"):
         mo = LsbootEmbeddedLocalDiskImage(parent_mo_or_dn="org-root/org-"+org_name+"/boot-policy-"+sp_template_boot_policy_name+"/storage/local-storage", order="3")
+    elif sp_template_boot_policy_name in ("HyperFlex-m2r1"):
+        mo = LsbootEmbeddedLocalLunImage(parent_mo_or_dn="org-root/org-"+org_name+"/boot-policy-"+sp_template_boot_policy_name+"/storage/local-storage", order="3")
     ucs_handle.add_mo(mo, True)
     mo = LsbootVirtualMedia(parent_mo_or_dn="org-root/org-"+org_name+"/boot-policy-"+sp_template_boot_policy_name, access="read-only-remote-cimc", order="1")
     ucs_handle.add_mo(mo, True)
